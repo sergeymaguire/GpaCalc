@@ -27,17 +27,17 @@ namespace GpaCalc
         {
             do
             {
-                Console.Write("Enter grade for Class #{0} (press E to exit and see GPA): ", counter += 1);
-                // write some code to prevent user from entering more than 10
+                Console.Write("Enter grade for module #{0} (press 0 to exit): ", counter += 1);
+                
                 char userInput = char.Parse(Console.ReadLine());
 
-                if (userInput == 'E')
+                if (userInput == '0')
                 {
                     break;
                 }
                 else
                 {
-                    grade = userInput; 
+                    grade = userInput; //assigns value for userInput into gradePoint
                     Console.Write("Enter credit unit(s) for grade: ");
                     creditUnit = int.Parse(Console.ReadLine());
 
