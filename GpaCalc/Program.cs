@@ -45,7 +45,7 @@ namespace GpaCalc
                 }
                 else
                 {
-
+                    //test
                     Console.Write("Enter credit unit(s) for grade: ");
                     units = char.Parse(Console.ReadLine());
                     if (char.IsDigit(units))
