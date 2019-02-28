@@ -5,69 +5,87 @@ namespace GpaCalc
     {
         static void Main(string[] args)
         {
-            int creditUnit = 0;
+            int totalPoints = 0;
             int totalCredits = 0;
-
-            char grade = ' ';
-            int gradePoint = 0;
-            int total = 0;
-
-            int counter = 0;
             double GPA = 0;
+            //string name = Console.ReadLine();
 
-            creditsGradeCalc(ref creditUnit, ref totalCredits, ref grade, ref gradePoint, ref total, ref counter);
 
-            GPA = total / totalCredits;
-            Console.Write("Your GPA this semester is {0:F2}", GPA);
-
+            creditsGradeCalc(ref totalCredits, ref totalPoints);
+            if (totalCredits != 0)
+            {
+                GPA = totalPoints / totalCredits;
+                //Console.WriteLine("Hello what is your name? ", name);
+                Console.Write("Your GPA for your classes are {0:F2}", GPA);
+            }
+            else
+            {
+                Console.Write("You put in a char for units instead of an integer");
+            }
             Console.ReadKey();
         }
 
-        private static void creditsGradeCalc(ref int creditUnit, ref int totalCredits, ref char grade, ref int gradePoint, ref int total, ref int counter)
+        private static void creditsGradeCalc(ref int totalCredits, ref int totalPoints)
         {
+            int points;
+            int creditUnit = 0;
+            char userLetterGrade = ' ';
+            int gradePoint = 0;
+            char units;
+            int counter = 0;
             do
             {
-                Console.Write("Enter grade for module #{0} (press 0 to exit): ", counter += 1);
-                
-                char userInput = char.Parse(Console.ReadLine());
+                Console.Write("Enter grade for for your classes #{0} (press E to exit): ", counter);
 
-                if (userInput == '0')
+                userLetterGrade = char.Parse(Console.ReadLine());
+
+                if (userLetterGrade == 'e' || userLetterGrade == 'E')
                 {
                     break;
                 }
                 else
                 {
-                    grade = userInput; //assigns value for userInput into gradePoint
-                    Console.Write("Enter credit unit(s) for grade: ");
-                    creditUnit = int.Parse(Console.ReadLine());
 
-                    gradePoint = GpaInput(grade, gradePoint);
-                    total += creditUnit * gradePoint;
-                    totalCredits += creditUnit;
+                    Console.Write("Enter credit unit(s) for grade: ");
+                    units = char.Parse(Console.ReadLine());
+                    if (char.IsDigit(units))
+                    {
+                        creditUnit = Int32.Parse(units.ToString());
+                        gradePoint = GpaInput(userLetterGrade, gradePoint);
+                        points = creditUnit * gradePoint;
+                        totalPoints = points + totalPoints;
+                        totalCredits += creditUnit;
+                        counter++;
+                    }
+
                 }
 
-            } while (grade != 0);
+            } while (userLetterGrade != 0);
         }
 
-        private static int GpaInput(char grade, int gradePoint)
+        private static int GpaInput(char letterGrade, int gradePoint)
         {
-            switch (grade)
+            switch (letterGrade)
             {
                 case 'A':
-                    gradePoint += 4;
-                    break;
+                case 'a':
+                    return 4;
+
                 case 'B':
-                    gradePoint += 3;
-                    break;
+                case 'b':
+                    return 3;
+
                 case 'C':
-                    gradePoint += 2;
-                    break;
+                case 'c':
+                    return 2;
+
                 case 'D':
-                    gradePoint += 1;
-                    break;
+                case 'd':
+                    return 1;
+
             }
 
-            return gradePoint;
+            return 0;
         }
     }
 }
