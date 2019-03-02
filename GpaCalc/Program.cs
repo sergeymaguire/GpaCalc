@@ -41,8 +41,11 @@ namespace GpaCalc
             int gradePoint = 0;
             char units;
             int counter = 0;
+            string classes = "";
             do
             {
+                Console.Write("Please enter the class you are taking: ", classes,counter);
+                classes = Console.ReadLine();
                 Console.WriteLine("Enter grade for for your class #{0} (press E to exit): ", counter);
 
                 userLetterGrade = char.Parse(Console.ReadLine());
