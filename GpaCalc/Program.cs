@@ -7,16 +7,24 @@ namespace GpaCalc
         {
             int totalPoints = 0;
             int totalCredits = 0;
-            double GPA = 0;
-            //string name = Console.ReadLine();
+            decimal GPA = 0;
+            string name = "";
+
+            while (String.IsNullOrEmpty(name))
+            {
+                Console.Write("please enter your name: ");
+                name = Console.ReadLine();
+            }
+
+
+
 
 
             creditsGradeCalc(ref totalCredits, ref totalPoints);
             if (totalCredits != 0)
             {
-                GPA = totalPoints / totalCredits;
-                //Console.WriteLine("Hello what is your name? ", name);
-                Console.Write("Your GPA for your classes are {0:F2}", GPA);
+                GPA = (decimal)totalPoints / (decimal)totalCredits;
+                Console.Write("{0} your GPA for your classes are {1:N2}", name, GPA);
             }
             else
             {
@@ -35,7 +43,7 @@ namespace GpaCalc
             int counter = 0;
             do
             {
-                Console.Write("Enter grade for for your classes #{0} (press E to exit): ", counter);
+                Console.WriteLine("Enter grade for for your class #{0} (press E to exit): ", counter);
 
                 userLetterGrade = char.Parse(Console.ReadLine());
 
@@ -45,7 +53,7 @@ namespace GpaCalc
                 }
                 else
                 {
-                    
+
                     Console.Write("Enter credit unit(s) for grade: ");
                     units = char.Parse(Console.ReadLine());
                     if (char.IsDigit(units))
