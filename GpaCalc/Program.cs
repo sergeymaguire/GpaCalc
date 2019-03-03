@@ -8,70 +8,78 @@ namespace GpaCalc
             int totalPoints = 0;
             int totalCredits = 0;
             decimal GPA = 0;
-            string name = "";
+            int creditUnit = 0;
+            int gradePoint = 0;
+            int points;
+            int classNumber = 1;
+            string name = getStudentName();
+            string className = "";
+            do
+            {
+                className = getClassName();
 
+                if (className != "" && className != "e" && className != "E")
+                {
+                    getClassGradeAndUnits(ref creditUnit, ref gradePoint, classNumber);
+
+                    points = creditUnit * gradePoint;
+                    totalPoints = points + totalPoints;
+                    totalCredits += creditUnit;
+                    classNumber++;
+                  
+
+                }
+
+            }
+            while (className != "" && className != "e" && className != "E");
+            GPA = (decimal)totalPoints / (decimal)totalCredits;
+            Console.Write("{0} your GPA for your classes are {1:N2}", name, GPA);
+            Console.ReadKey();
+        }
+
+        private static string getClassName()
+        {
+            string className = "";
+            int counter = 0;
+            Console.Write("Please enter the class you are taking:(or press E to see GPA) ", className, counter);
+            return Console.ReadLine();
+
+        }
+
+        private static string getStudentName()
+        {
+            string name = "";
             while (String.IsNullOrEmpty(name))
             {
                 Console.Write("please enter your name: ");
                 name = Console.ReadLine();
             }
 
-
-
-
-
-            creditsGradeCalc(ref totalCredits, ref totalPoints);
-            if (totalCredits != 0)
-            {
-                GPA = (decimal)totalPoints / (decimal)totalCredits;
-                Console.Write("{0} your GPA for your classes are {1:N2}", name, GPA);
-            }
-            else
-            {
-                Console.Write("You put in a char for units instead of an integer");
-            }
-            Console.ReadKey();
+            return name;
         }
 
-        private static void creditsGradeCalc(ref int totalCredits, ref int totalPoints)
+        private static void getClassGradeAndUnits(ref int creditUnit, ref int gradePoint, int classNumber)
         {
-            int points;
-            int creditUnit = 0;
+
+
             char userLetterGrade = ' ';
-            int gradePoint = 0;
             char units;
-            int counter = 0;
-            string classes = "";
-            do
+
+            // do
+            // {
+            Console.Write("Enter grade for for your class #{0}: ", classNumber);
+
+            userLetterGrade = char.Parse(Console.ReadLine());
+            Console.Write("Enter credit unit(s) for grade: ");
+            units = char.Parse(Console.ReadLine());
+            if (char.IsDigit(units))
             {
-                Console.Write("Please enter the class you are taking: ", classes,counter);
-                classes = Console.ReadLine();
-                Console.WriteLine("Enter grade for for your class #{0} (press E to exit): ", counter);
+                creditUnit = Int32.Parse(units.ToString());
+                gradePoint = GpaInput(userLetterGrade, gradePoint);
 
-                userLetterGrade = char.Parse(Console.ReadLine());
+            }
 
-                if (userLetterGrade == 'e' || userLetterGrade == 'E')
-                {
-                    break;
-                }
-                else
-                {
-
-                    Console.Write("Enter credit unit(s) for grade: ");
-                    units = char.Parse(Console.ReadLine());
-                    if (char.IsDigit(units))
-                    {
-                        creditUnit = Int32.Parse(units.ToString());
-                        gradePoint = GpaInput(userLetterGrade, gradePoint);
-                        points = creditUnit * gradePoint;
-                        totalPoints = points + totalPoints;
-                        totalCredits += creditUnit;
-                        counter++;
-                    }
-
-                }
-
-            } while (userLetterGrade != 0);
+            //} while (userLetterGrade != 0);
         }
 
         private static int GpaInput(char letterGrade, int gradePoint)
