@@ -1,6 +1,13 @@
 ﻿using System;
 namespace GpaCalc
 {
+    //3/04/19
+
+    //second project
+
+    //C# programming
+
+    //Gpa calculator
     class Program
     {
         static void Main(string[] args)
@@ -37,7 +44,7 @@ namespace GpaCalc
             Console.ReadKey();
         }
 
-        private static string getClassName()
+        private static string getClassName()//function to ask and get class name
         {
             string className = "";
             int counter = 0;
@@ -46,10 +53,10 @@ namespace GpaCalc
 
         }
 
-        private static string getStudentName()
+        private static string getStudentName()//function to get student name
         {
             string name = "";
-            while (String.IsNullOrEmpty(name))
+            while (String.IsNullOrEmpty(name))//makes user put in name can not leave blank
             {
                 Console.Write("please enter your name: ");
                 name = Console.ReadLine();
