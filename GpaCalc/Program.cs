@@ -18,7 +18,7 @@ namespace GpaCalc
             int creditUnit = 0;
             int gradePoint = 0;
             int points;
-            int classNumber = 1;
+            int classNumber = 1;//variables
             string name = getStudentName();
             string className = "";
             do
@@ -30,15 +30,15 @@ namespace GpaCalc
                     getClassGradeAndUnits(ref creditUnit, ref gradePoint, classNumber);
 
                     points = creditUnit * gradePoint;
-                    totalPoints = points + totalPoints;
+                    totalPoints = points + totalPoints;//calculating gpa
                     totalCredits += creditUnit;
-                    classNumber++;
+                    classNumber++;//updating classes taken counter
                   
 
                 }
 
             }
-            while (className != "" && className != "e" && className != "E");
+            while (className != "" && className != "e" && className != "E");// outputting gpa as long as user does not press "e" to exit
             GPA = (decimal)totalPoints / (decimal)totalCredits;
             Console.Write("{0} your GPA for your classes are {1:N2}", name, GPA);
             Console.ReadKey();
@@ -48,7 +48,7 @@ namespace GpaCalc
         {
             string className = "";
             int counter = 0;
-            Console.Write("Please enter the class you are taking:(or press E to see GPA) ", className, counter);
+            Console.Write("Please enter the class you are taking:(or press E to see GPA) ", className, counter);//allows you to exit after putting in a class
             return Console.ReadLine();
 
         }
@@ -72,9 +72,8 @@ namespace GpaCalc
             char userLetterGrade = ' ';
             char units;
 
-            // do
-            // {
-            Console.Write("Enter grade for for your class #{0}: ", classNumber);
+       
+            Console.Write("Enter grade for for your class #{0}: ", classNumber);//asking for classes using a counter so it shows class 1, then class 2 for the next question etc..
 
             userLetterGrade = char.Parse(Console.ReadLine());
             Console.Write("Enter credit unit(s) for grade: ");
@@ -86,16 +85,16 @@ namespace GpaCalc
 
             }
 
-            //} while (userLetterGrade != 0);
+           
         }
 
         private static int GpaInput(char letterGrade, int gradePoint)
         {
             switch (letterGrade)
             {
-                case 'A':
+                case 'A':// allowing user to input lowercase or uppercase b
                 case 'a':
-                    return 4;
+                    return 4;// based on grade input is how many credits youll get
 
                 case 'B':
                 case 'b':
